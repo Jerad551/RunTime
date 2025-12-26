@@ -1,0 +1,73 @@
+name: src CI
+
+on:
+  push:
+    branches: [ main, develop, DDT_214 ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.10', '3.11', '3.12']
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Run tests
+      run: |
+        pytest tests/ -v --tb=short
+    
+    - name: Test CLI commands
+      run: |
+        python src/cli.py load --summary
+        python src/cli.py analyze --top 5
+    
+    - name: Generate visualizations
+      run: |
+        python src/cli.py visualize --all
+    
+    - name: Upload visualization artifacts
+      uses: actions/upload-artifact@v4
+      if: matrix.python-version == '3.12'
+      with:
+        name: visualizations
+        path: output/visualizations/
+        retention-days: 30
+
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    
+    - name: Install linting tools
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 black
+    
+    - name: Check code style with black
+      run: |
+        black --check src/ tests/ || true
+    
+    - name: Lint with flake8
+      run: |
+        flake8 src/ tests/ --count --select=E9,F63,F7,F82 --show-source --statistics || true
+        flake8 src/ tests/ --count --max-complexity=10 --max-line-length=127 --statistics || true

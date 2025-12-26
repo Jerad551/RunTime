@@ -1,0 +1,180 @@
+# RunTime - Code Frequency Analysis
+
+A comprehensive Python toolkit for analyzing and visualizing code frequency data from Git repositories.
+
+## Overview
+
+This project provides tools to load, analyze, and visualize code change patterns over time, helping developers understand their coding activity, identify sprints, and track productivity trends.
+
+## Features
+
+- 📊 **Data Loading**: Efficient CSV data loading with pandas
+- 🔍 **Advanced Analysis**: Detect coding sprints, calculate churn metrics, analyze activity patterns
+- 📈 **Rich Visualizations**: Timeline plots, heatmaps, yearly summaries, and more
+- ✅ **Fully Tested**: Comprehensive test suite with pytest
+
+## Installation
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+```
+
+## Usage
+
+### Quick Start
+
+```bash
+# Load and display summary
+python src/code_frequency_loader.py
+
+# Run comprehensive analysis
+python src/code_frequency_analyzer.py
+
+# Generate visualizations
+python src/code_frequency_visualizer.py
+```
+
+### As a Library
+
+```python
+from src.code_frequency_loader import CodeFrequencyLoader
+from src.code_frequency_analyzer import CodeFrequencyAnalyzer
+from src.code_frequency_visualizer import CodeFrequencyVisualizer
+
+# Load data
+loader = CodeFrequencyLoader("Code frequency.csv")
+data = loader.load()
+summary = loader.get_summary()
+
+# Analyze patterns
+analyzer = CodeFrequencyAnalyzer(loader)
+yearly_stats = analyzer.get_yearly_stats()
+sprints = analyzer.detect_sprints()
+top_weeks = analyzer.get_top_activity_weeks(10)
+
+# Create visualizations
+visualizer = CodeFrequencyVisualizer(loader)
+visualizer.create_dashboard(save_dir="output/visualizations")
+```
+
+## Modules
+
+### CodeFrequencyLoader
+Handles loading and basic processing of code frequency data.
+
+**Methods:**
+- `load()`: Load CSV data into a pandas DataFrame
+- `get_summary()`: Get summary statistics (total additions, deletions, date range, etc.)
+
+### CodeFrequencyAnalyzer
+Provides advanced analysis capabilities.
+
+**Methods:**
+- `get_activity_periods()`: Identify periods of significant activity
+- `get_yearly_stats()`: Calculate statistics by year
+- `get_monthly_stats()`: Calculate statistics by month
+- `get_top_activity_weeks()`: Find weeks with most activity
+- `calculate_activity_ratio()`: Get ratio of active to total weeks
+- `get_churn_stats()`: Calculate code churn metrics
+- `detect_sprints()`: Detect coding sprint periods
+- `get_productivity_trends()`: Analyze productivity across time periods
+
+### CodeFrequencyVisualizer
+Creates publication-quality visualizations.
+
+**Methods:**
+- `plot_timeline()`: Plot additions and deletions over time
+- `plot_net_changes()`: Plot net code changes
+- `plot_yearly_summary()`: Create yearly summary charts
+- `plot_activity_heatmap()`: Generate activity heatmap by month/year
+- `create_dashboard()`: Generate complete visualization dashboard
+
+## Data Format
+
+The CSV file should have the following format:
+
+```csv
+"DateTime","Additions","Deletions"
+"2017-10-22",1123,-155
+"2017-10-29",11,-1
+...
+```
+
+## Testing
+
+```bash
+# Run all tests
+pytest
+
+# Run with coverage
+pytest --cov=src
+
+# Run specific test file
+pytest tests/test_load.py
+```
+
+## Output
+
+Visualizations are saved to `output/visualizations/` by default:
+- `timeline.png`: Code changes over time
+- `net_changes.png`: Net changes bar chart
+- `yearly_summary.png`: Yearly statistics
+- `activity_heatmap.png`: Monthly activity heatmap
+
+## Project Structure
+
+```
+RunTime/
+├── Code frequency.csv          # Input data
+├── README.md                   # This file
+├── requirements.txt            # Python dependencies
+├── LICENSE.md                  # MIT License
+├── src/
+│   ├── code_frequency_loader.py      # Data loading
+│   ├── code_frequency_analyzer.py    # Analysis tools
+│   └── code_frequency_visualizer.py  # Visualization tools
+├── tests/
+│   └── test_load.py           # Test suite
+├── notebooks/                  # Jupyter notebooks (for exploration)
+└── output/                     # Generated visualizations
+```
+
+## Examples
+
+### Example Output
+
+```
+Loading code frequency data...
+Loaded 427 records
+
+Summary Statistics:
+Total Additions: 1,659,598
+Total Deletions: 1,648,735
+Net Changes: 10,863
+Date Range: 2017-10-22 to 2025-12-21
+Number of Records: 427
+```
+
+### Analysis Output
+
+```
+🔄 Churn Statistics:
+  Total Churn: 3,308,333
+  Avg Weekly Churn: 7,747.79
+  Max Weekly Churn: 732,342
+  Weeks With Churn: 78
+  Activity Ratio: 18.27%
+```
+
+## License
+
+MIT License - see [LICENSE.md](LICENSE.md) for details.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Author
+
+JeradCronin - [GitHub](https://github.com/Jerad551/RunTime)
