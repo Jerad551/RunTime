@@ -5,7 +5,7 @@ from .code_frequency_analyzer import CodeFrequencyAnalyzer
 from .code_frequency_visualizer import CodeFrequencyVisualizer
 
 __all__ = [
-    'CodeFrequencyLoader',
-    'CodeFrequencyAnalyzer',
-    'CodeFrequencyVisualizer',
+    "CodeFrequencyLoader",
+    "CodeFrequencyAnalyzer",
+    "CodeFrequencyVisualizer",
 ]
