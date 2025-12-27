@@ -4,9 +4,8 @@ This module provides advanced analysis capabilities for code frequency data.
 """
 
 import pandas as pd
-import numpy as np
-from typing import Dict, List, Tuple
-from datetime import datetime, timedelta
+from typing import Dict, List
+from datetime import datetime
 
 try:
     from .code_frequency_loader import CodeFrequencyLoader
@@ -66,8 +65,12 @@ class CodeFrequencyAnalyzer:
             .round(2)
         )
 
-        yearly.columns = ["_".join(col).strip() for col in yearly.columns.values]
-        yearly["net_changes"] = yearly["Additions_sum"] + yearly["Deletions_sum"]
+        yearly.columns = [
+            "_".join(col).strip() for col in yearly.columns.values
+        ]
+        yearly["net_changes"] = (
+            yearly["Additions_sum"] + yearly["Deletions_sum"]
+        )
 
         return yearly
 
@@ -80,10 +83,16 @@ class CodeFrequencyAnalyzer:
         df = self.data.copy()
         df["YearMonth"] = df["DateTime"].dt.to_period("M")
 
-        monthly = df.groupby("YearMonth").agg({"Additions": "sum", "Deletions": "sum"})
+        monthly = df.groupby("YearMonth").agg(
+            {"Additions": "sum", "Deletions": "sum"}
+        )
 
-        monthly["net_changes"] = monthly["Additions"] + monthly["Deletions"]
-        monthly["abs_changes"] = monthly["Additions"] + abs(monthly["Deletions"])
+        monthly["net_changes"] = (
+            monthly["Additions"] + monthly["Deletions"]
+        )
+        monthly["abs_changes"] = (
+            monthly["Additions"] + abs(monthly["Deletions"])
+        )
 
         return monthly
 
@@ -193,8 +202,12 @@ class CodeFrequencyAnalyzer:
             {"Additions": ["sum", "mean"], "Deletions": ["sum", "mean"]}
         )
 
-        trends.columns = ["_".join(col).strip() for col in trends.columns.values]
-        trends["net_changes"] = trends["Additions_sum"] + trends["Deletions_sum"]
+        trends.columns = [
+            "_".join(col).strip() for col in trends.columns.values
+        ]
+        trends["net_changes"] = (
+            trends["Additions_sum"] + trends["Deletions_sum"]
+        )
 
         return trends
 

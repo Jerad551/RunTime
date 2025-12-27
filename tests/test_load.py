@@ -1,14 +1,21 @@
-"""Tests for CodeFrequencyLoader."""
+assert ("DateTime" in data.columns and 
+        "Additions" in data.columns and 
+        "Deletions" in data.columns)        def test_expected_columns_present():
+            """Test that the required columns are present."""
+            loader = CodeFrequencyLoader()
+            data = loader.load()
+        
+            expected_columns = ["DateTime", "Additions", "Deletions"]
+            assert all(col in data.columns for col in expected_columns)"""Tests for CodeFrequencyLoader."""
 
 import sys
 from pathlib import Path
-
-# Add parent directory to path
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
 import pytest
 import pandas as pd
-from src.code_frequency_loader import CodeFrequencyLoader
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from src.code_frequency_loader import CodeFrequencyLoader  # noqa: E402
 
 
 def test_load_returns_dataframe():

@@ -23,7 +23,8 @@ class CodeFrequencyLoader:
         """Load the code frequency data from CSV.
 
         Returns:
-            pandas.DataFrame: Loaded data with DateTime, Additions, and Deletions columns
+            pandas.DataFrame: Loaded data with DateTime, Additions,
+                and Deletions columns
         """
         if not self.csv_path.exists():
             raise FileNotFoundError(f"CSV file not found: {self.csv_path}")
@@ -44,7 +45,9 @@ class CodeFrequencyLoader:
         return {
             "total_additions": self.data["Additions"].sum(),
             "total_deletions": abs(self.data["Deletions"].sum()),
-            "net_changes": self.data["Additions"].sum() + self.data["Deletions"].sum(),
+            "net_changes": (
+                self.data["Additions"].sum() + self.data["Deletions"].sum()
+            ),
             "date_range": {
                 "start": self.data["DateTime"].min(),
                 "end": self.data["DateTime"].max(),
@@ -61,7 +64,7 @@ def main():
     data = loader.load()
 
     print(f"\nLoaded {len(data)} records")
-    print(f"\nFirst 5 rows:")
+    print("\nFirst 5 rows:")
     print(data.head())
 
     print("\n" + "=" * 50)
@@ -71,9 +74,9 @@ def main():
     print(f"Total Additions: {summary['total_additions']:,}")
     print(f"Total Deletions: {summary['total_deletions']:,}")
     print(f"Net Changes: {summary['net_changes']:,}")
-    print(
-        f"Date Range: {summary['date_range']['start'].date()} to {summary['date_range']['end'].date()}"
-    )
+    start_date = summary['date_range']['start'].date()
+    end_date = summary['date_range']['end'].date()
+    print(f"Date Range: {start_date} to {end_date}")
     print(f"Number of Records: {summary['num_records']}")
 
 

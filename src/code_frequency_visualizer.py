@@ -6,7 +6,6 @@ This module provides visualization capabilities for code frequency data.
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import seaborn as sns
-import pandas as pd
 import numpy as np
 from pathlib import Path
 from typing import Optional, Tuple
@@ -23,7 +22,9 @@ class CodeFrequencyVisualizer:
     """Visualizer for code frequency data."""
 
     def __init__(
-        self, loader: CodeFrequencyLoader = None, style: str = "seaborn-v0_8-darkgrid"
+        self,
+        loader: CodeFrequencyLoader = None,
+        style: str = "seaborn-v0_8-darkgrid"
     ):
         """Initialize the visualizer.
 
@@ -41,19 +42,22 @@ class CodeFrequencyVisualizer:
         # Set style
         try:
             plt.style.use(style)
-        except:
+        except OSError:
             plt.style.use("default")
 
         sns.set_palette("husl")
 
     def plot_timeline(
-        self, figsize: Tuple[int, int] = (15, 6), save_path: Optional[str] = None
+        self,
+        figsize: Tuple[int, int] = (15, 6),
+        save_path: Optional[str] = None
     ) -> plt.Figure:
         """Plot additions and deletions over time.
 
         Args:
             figsize: Figure size (width, height)
-            save_path: Path to save figure. If None, displays interactively.
+            save_path: Path to save figure. If None, displays
+                interactively.
 
         Returns:
             matplotlib Figure object
@@ -79,7 +83,11 @@ class CodeFrequencyVisualizer:
 
         ax.set_xlabel("Date", fontsize=12)
         ax.set_ylabel("Lines of Code", fontsize=12)
-        ax.set_title("Code Frequency Over Time", fontsize=14, fontweight="bold")
+        ax.set_title(
+            "Code Frequency Over Time",
+            fontsize=14,
+            fontweight="bold"
+        )
         ax.legend(loc="upper left")
         ax.grid(True, alpha=0.3)
 
@@ -97,7 +105,9 @@ class CodeFrequencyVisualizer:
         return fig
 
     def plot_net_changes(
-        self, figsize: Tuple[int, int] = (15, 6), save_path: Optional[str] = None
+        self,
+        figsize: Tuple[int, int] = (15, 6),
+        save_path: Optional[str] = None
     ) -> plt.Figure:
         """Plot net changes over time.
 
@@ -113,12 +123,22 @@ class CodeFrequencyVisualizer:
         net_changes = self.data["Additions"] + self.data["Deletions"]
         colors = ["green" if x >= 0 else "red" for x in net_changes]
 
-        ax.bar(self.data["DateTime"], net_changes, color=colors, alpha=0.6, width=5)
+        ax.bar(
+            self.data["DateTime"],
+            net_changes,
+            color=colors,
+            alpha=0.6,
+            width=5
+        )
         ax.axhline(y=0, color="black", linestyle="-", linewidth=0.5)
 
         ax.set_xlabel("Date", fontsize=12)
         ax.set_ylabel("Net Changes (Lines)", fontsize=12)
-        ax.set_title("Net Code Changes Over Time", fontsize=14, fontweight="bold")
+        ax.set_title(
+            "Net Code Changes Over Time",
+            fontsize=14,
+            fontweight="bold"
+        )
         ax.grid(True, alpha=0.3, axis="y")
 
         # Format x-axis
@@ -135,7 +155,9 @@ class CodeFrequencyVisualizer:
         return fig
 
     def plot_yearly_summary(
-        self, figsize: Tuple[int, int] = (12, 6), save_path: Optional[str] = None
+        self,
+        figsize: Tuple[int, int] = (12, 6),
+        save_path: Optional[str] = None
     ) -> plt.Figure:
         """Plot yearly summary statistics.
 
@@ -174,7 +196,9 @@ class CodeFrequencyVisualizer:
 
         ax1.set_xlabel("Year", fontsize=12)
         ax1.set_ylabel("Total Lines", fontsize=12)
-        ax1.set_title("Total Changes by Year", fontsize=12, fontweight="bold")
+        ax1.set_title(
+            "Total Changes by Year", fontsize=12, fontweight="bold"
+        )
         ax1.set_xticks(x_pos)
         ax1.set_xticklabels(x, rotation=45)
         ax1.legend()
@@ -198,7 +222,9 @@ class CodeFrequencyVisualizer:
         return fig
 
     def plot_activity_heatmap(
-        self, figsize: Tuple[int, int] = (14, 8), save_path: Optional[str] = None
+        self,
+        figsize: Tuple[int, int] = (14, 8),
+        save_path: Optional[str] = None
     ) -> plt.Figure:
         """Plot activity heatmap by year and month.
 
@@ -224,7 +250,9 @@ class CodeFrequencyVisualizer:
         )
 
         fig, ax = plt.subplots(figsize=figsize)
-        sns.heatmap(pivot, cmap="YlOrRd", ax=ax, cbar_kws={"label": "Total Changes"})
+        sns.heatmap(
+            pivot, cmap="YlOrRd", ax=ax, cbar_kws={"label": "Total Changes"}
+        )
 
         ax.set_xlabel("Year", fontsize=12)
         ax.set_ylabel("Month", fontsize=12)
@@ -273,19 +301,20 @@ class CodeFrequencyVisualizer:
         )
 
         # Net changes
-        self.plot_net_changes(
-            save_path=str(save_dir / "net_changes.png") if save_dir else None
-        )
+        net_path = str(save_dir / "net_changes.png") if save_dir else None
+        self.plot_net_changes(save_path=net_path)
 
         # Yearly summary
-        self.plot_yearly_summary(
-            save_path=str(save_dir / "yearly_summary.png") if save_dir else None
+        yearly_path = (
+            str(save_dir / "yearly_summary.png") if save_dir else None
         )
+        self.plot_yearly_summary(save_path=yearly_path)
 
         # Activity heatmap
-        self.plot_activity_heatmap(
-            save_path=str(save_dir / "activity_heatmap.png") if save_dir else None
+        heatmap_path = (
+            str(save_dir / "activity_heatmap.png") if save_dir else None
         )
+        self.plot_activity_heatmap(save_path=heatmap_path)
 
         if not save_dir:
             plt.show()

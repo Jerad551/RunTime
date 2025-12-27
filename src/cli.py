@@ -21,9 +21,9 @@ def load_command(args):
     data = loader.load()
 
     print(f"✅ Successfully loaded {len(data)} records")
-    print(
-        f"\nDate range: {data['DateTime'].min().date()} to {data['DateTime'].max().date()}"
-    )
+    date_min = data['DateTime'].min().date()
+    date_max = data['DateTime'].max().date()
+    print(f"\nDate range: {date_min} to {date_max}")
 
     if args.summary:
         print("\n" + "=" * 60)
@@ -82,12 +82,13 @@ def analyze_command(args):
             for i, sprint in enumerate(sprints, 1):
                 print(f"\nSprint {i}:")
                 for key, value in sprint.items():
+                    key_title = key.replace('_', ' ').title()
                     if hasattr(value, "date"):
-                        print(f"  {key.replace('_', ' ').title()}: {value.date()}")
+                        print(f"  {key_title}: {value.date()}")
                     elif isinstance(value, int):
-                        print(f"  {key.replace('_', ' ').title()}: {value:,}")
+                        print(f"  {key_title}: {value:,}")
                     else:
-                        print(f"  {key.replace('_', ' ').title()}: {value:.2f}")
+                        print(f"  {key_title}: {value:.2f}")
         else:
             print("  No significant sprints detected")
 
@@ -108,23 +109,23 @@ def visualize_command(args):
 
         if args.timeline:
             print("Creating timeline plot...")
-            visualizer.plot_timeline(save_path=str(output_dir / "timeline.png"))
+            timeline_path = str(output_dir / "timeline.png")
+            visualizer.plot_timeline(save_path=timeline_path)
 
         if args.net:
             print("Creating net changes plot...")
-            visualizer.plot_net_changes(save_path=str(output_dir / "net_changes.png"))
+            net_path = str(output_dir / "net_changes.png")
+            visualizer.plot_net_changes(save_path=net_path)
 
         if args.yearly:
             print("Creating yearly summary...")
-            visualizer.plot_yearly_summary(
-                save_path=str(output_dir / "yearly_summary.png")
-            )
+            yearly_path = str(output_dir / "yearly_summary.png")
+            visualizer.plot_yearly_summary(save_path=yearly_path)
 
         if args.heatmap:
             print("Creating activity heatmap...")
-            visualizer.plot_activity_heatmap(
-                save_path=str(output_dir / "activity_heatmap.png")
-            )
+            heatmap_path = str(output_dir / "activity_heatmap.png")
+            visualizer.plot_activity_heatmap(save_path=heatmap_path)
 
         print(f"✅ Visualizations saved to {output_dir}/")
 
@@ -138,24 +139,30 @@ def main():
 Examples:
   # Load and show summary
   %(prog)s load --summary
-  
+
   # Full analysis with all options
   %(prog)s analyze --all
-  
+
   # Create all visualizations
   %(prog)s visualize --all
-  
+
   # Specific analysis
   %(prog)s analyze --top 10 --sprints
         """,
     )
 
-    parser.add_argument("--version", action="version", version="RunTime 1.0.0")
+    parser.add_argument(
+        "--version", action="version", version="RunTime 1.0.0"
+    )
 
-    subparsers = parser.add_subparsers(dest="command", help="Available commands")
+    subparsers = parser.add_subparsers(
+        dest="command", help="Available commands"
+    )
 
     # Load command
-    load_parser = subparsers.add_parser("load", help="Load and display data")
+    load_parser = subparsers.add_parser(
+        "load", help="Load and display data"
+    )
     load_parser.add_argument(
         "-f",
         "--file",
@@ -163,9 +170,12 @@ Examples:
         help="CSV file to load (default: Code frequency.csv)",
     )
     load_parser.add_argument(
-        "-s", "--summary", action="store_true", help="Show summary statistics"
+        "-s", "--summary", action="store_true",
+        help="Show summary statistics"
     )
-    load_parser.add_argument("--head", type=int, metavar="N", help="Show first N rows")
+    load_parser.add_argument(
+        "--head", type=int, metavar="N", help="Show first N rows"
+    )
     load_parser.set_defaults(func=load_command)
 
     # Analyze command
@@ -173,10 +183,12 @@ Examples:
         "analyze", help="Analyze code frequency patterns"
     )
     analyze_parser.add_argument(
-        "-f", "--file", default="Code frequency.csv", help="CSV file to analyze"
+        "-f", "--file", default="Code frequency.csv",
+        help="CSV file to analyze"
     )
     analyze_parser.add_argument(
-        "-a", "--all", action="store_true", help="Show all analysis"
+        "-a", "--all", action="store_true",
+        help="Show all analysis"
     )
     analyze_parser.add_argument(
         "--activity", action="store_true", help="Show activity ratio"
@@ -196,9 +208,12 @@ Examples:
     analyze_parser.set_defaults(func=analyze_command)
 
     # Visualize command
-    viz_parser = subparsers.add_parser("visualize", help="Create visualizations")
+    viz_parser = subparsers.add_parser(
+        "visualize", help="Create visualizations"
+    )
     viz_parser.add_argument(
-        "-f", "--file", default="Code frequency.csv", help="CSV file to visualize"
+        "-f", "--file", default="Code frequency.csv",
+        help="CSV file to visualize"
     )
     viz_parser.add_argument(
         "-o",
@@ -207,10 +222,12 @@ Examples:
         help="Output directory (default: output/visualizations)",
     )
     viz_parser.add_argument(
-        "-a", "--all", action="store_true", help="Create all visualizations"
+        "-a", "--all", action="store_true",
+        help="Create all visualizations"
     )
     viz_parser.add_argument(
-        "-d", "--dashboard", action="store_true", help="Create complete dashboard"
+        "-d", "--dashboard", action="store_true",
+        help="Create complete dashboard"
     )
     viz_parser.add_argument(
         "--timeline", action="store_true", help="Create timeline plot"
