@@ -1,5 +1,5 @@
 ---discription': ---
-Meta
+Guidance and best practices for contributing to the RunTime repository 
 # AI Coding Agent Instructions for RunTime
 
 ## Project Overview
