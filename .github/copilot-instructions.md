@@ -1,4 +1,73 @@
-# Copilot instructions for this repository
+---discription': ---
+Meta
+# AI Coding Agent Instructions for RunTime
+
+## Project Overview
+RunTime is a production-ready Python toolkit for analyzing and visualizing code frequency data (from Git repositories). It features:
+- Modular architecture: `src/` contains loader, analyzer, visualizer, and CLI modules
+- Data-driven workflows: All analysis is based on the root `Code frequency.csv` (2017–2025)
+- CLI, Python API, and Jupyter notebook interfaces
+- Output visualizations in `output/visualizations/`
+
+## Key Developer Workflows
+- **Testing:**
+   - Run all tests: `pytest` or `pytest -v` (see `tests/`)
+   - Coverage: `pytest --cov=src`
+- **Analysis:**
+   - Full: `python src/cli.py analyze --all`
+   - Top weeks: `python src/cli.py analyze --top 5`
+   - Sprints: `python src/cli.py analyze --sprints`
+- **Visualization:**
+   - All charts: `python src/cli.py visualize --all`
+   - Timeline: `python src/cli.py visualize --timeline`
+   - Heatmap: `python src/cli.py visualize --heatmap`
+- **Interactive:**
+   - Use `notebooks/exploration.ipynb` for stepwise, cell-based analysis and plotting
+- **Examples:**
+   - Run advanced patterns: `python examples/advanced_examples.py`
+
+## Architecture & Patterns
+- **src/code_frequency_loader.py**: Loads CSV, provides summary stats
+- **src/code_frequency_analyzer.py**: Advanced analytics (sprints, churn, trends)
+- **src/code_frequency_visualizer.py**: All plotting (timeline, heatmap, yearly, dashboard)
+- **src/cli.py**: Unified CLI for all operations (load, analyze, visualize)
+- **notebooks/exploration.ipynb**: Jupyter workflow, mirrors CLI and API patterns
+- **tests/test_load.py**: 7 tests, covers loader and summary logic
+
+### Cross-File Patterns
+- Always import via `from src import ...` (see `__init__.py`)
+- Use pandas for all data manipulation
+- Visualizations use matplotlib/seaborn; outputs saved to `output/visualizations/`
+- CLI and API share logic—prefer CLI for batch, API for custom/interactive
+- Notebooks: Use loader/analyzer/visualizer objects as in CLI/examples
+
+## Project-Specific Conventions
+- Do not change core module APIs without considering backward compatibility
+- Do not remove or bypass test coverage
+- Add new analysis/visualization features as new methods/classes in `src/`
+- Document new CLI commands in `README.md` and `QUICKSTART.md`
+- Preserve `LICENSE.md` in all derived or published artifacts
+
+## Integration & Extensibility
+- Core dependencies: pandas, numpy, matplotlib, seaborn, pytest
+- No external APIs/services; all analysis is local and reproducible
+- Easy to add new analyzers, visualizations, or CLI commands (see examples/advanced_examples.py)
+
+## Reference Files
+- `README.md`, `QUICKSTART.md`, `PROJECT_STATUS.md`: Full documentation, usage, and status
+- `examples/advanced_examples.py`: Advanced usage and custom workflows
+- `notebooks/exploration.ipynb`: Interactive, cell-based exploration
+
+## Enhancement Opportunities
+- [ ] Web dashboard (Streamlit/Dash)
+- [ ] CI/CD with GitHub Actions (see `.github/workflows/ci.yml`)
+- [ ] PDF/HTML report generation
+- [ ] Multi-repository comparison
+- [ ] Statistical forecasting
+- [ ] Docker containerization
+
+---
+**Status:** All core features implemented, tested, and documented. See `README.md` for details.
 
 Repository metadata (from attachments):
 - Owner: Jerad551
