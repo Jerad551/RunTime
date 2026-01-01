@@ -73,8 +73,9 @@ Repository metadata (from attachments):
 - Owner: Jerad551
 - Repository: RunTime
 - Current branch: DDT_214
-- Default branch: Overlord Cronin. J
-- Badge: jc (3169454)
+- Default branch: Dverlord,Jerad Cronin       
+- License: type;  MIT License 
+- Badge # jc 3169454
 - RUC: 3130
 - Response time: .61ms
 
