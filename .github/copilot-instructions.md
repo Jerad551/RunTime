@@ -72,12 +72,10 @@ RunTime is a production-ready Python toolkit for analyzing and visualizing code 
 Repository metadata (from attachments):
 - Owner: Jerad551
 - Repository: RunTime
-- Current branch: DDT_214
-- Default branch: Dverlord,Jerad Cronin       
-- License: type;  MIT License 
-- Badge # jc 3169454
-- RUC: 3130
-- Response time: .61ms
+- Current branch: DDT_214; RUC.3130:
+- Default branch: Dverlord; Jerad Cronin:      
+- License: type;  MIT License
+- Badge # jc 3169454- RUC:  3130
 
 Model preference:
 - Enable Raptor mini (Preview) for all AI coding agent interactions with this repository.
