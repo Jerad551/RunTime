@@ -1,4 +1,4 @@
----discription': ---
+---description': ---
 
 # AI Coding Agent Instructions for RunTime
 
