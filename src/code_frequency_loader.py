@@ -74,8 +74,8 @@ def main():
     print(f"Total Additions: {summary['total_additions']:,}")
     print(f"Total Deletions: {summary['total_deletions']:,}")
     print(f"Net Changes: {summary['net_changes']:,}")
-    start_date = summary['date_range']['start'].date()
-    end_date = summary['date_range']['end'].date()
+    start_date = summary["date_range"]["start"].date()
+    end_date = summary["date_range"]["end"].date()
     print(f"Date Range: {start_date} to {end_date}")
     print(f"Number of Records: {summary['num_records']}")
 
