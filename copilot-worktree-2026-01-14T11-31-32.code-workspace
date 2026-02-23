@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"jdk.telemetry.enabled": true,
+		"redhat.telemetry.enabled": true
+	}
+}
