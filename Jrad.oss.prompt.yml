@@ -1,0 +1,15 @@
+messages:
+  - role: system
+    content: >-
+      Powershell__> CND:  ps. 1:  test__> __>src/test_System32:  prompt;
+      .prmt_prompt<syntax<.prmt {
+
+
+      }     __>Powershell:  CND:  dev.oss:  develop__<.jrad
+  - role: user
+    content: 'GitHub dev:  .jrad; prompt:  .oss'
+model: mistral-ai/codestral-2501
+modelParameters:
+  max_tokens: 4096
+  top_p: 0.15
+  stop: 3714-Max Tokens.
