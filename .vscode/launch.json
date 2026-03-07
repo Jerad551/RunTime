@@ -1,0 +1,202 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "name": ".NET Core Launch (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/bin/Debug/.jjs/<project-name.dll>",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
+            "name": "Launch and Debug Hosted Blazor WebAssembly App",
+            "type": "blazorwasm",
+            "request": "launch",
+            "hosted": true,
+            "program": "${workspaceFolder}/bin/Debug/.jjs/<project-name.dll>",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "C#: <.j.e.rad>€•jjs<%°$ Debug",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/<relative-path-to-project-folder><.j.e.rad>€•jjs<%°$.csproj"
+        },
+        {
+            "name": "(gdb) Pipe Attach",
+            "type": "cppdbg",
+            "request": "attach",
+            "program": "enter program name, for example ${workspaceFolder}/a.out",
+            "processId": "${command:pickRemoteProcess}",
+            "pipeTransport": {
+                "debuggerPath": "/usr/bin/gdb",
+                "pipeProgram": "/usr/bin/ssh",
+                "pipeArgs": [],
+                "pipeCwd": ""
+            },
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        },{🔍}
+        {
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "enter program name, for example ${workspaceFolder}/a.out",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        },{
+            "name": "Launch and Debug Standalone Blazor WebAssembly App",
+            "type": "blazorwasm",
+            "request": "launch",
+            "cwd": "${workspaceFolder}"
+        },{
+            "name": "Electron Main",
+            "program": "${workspaceFolder}/main.js",
+            "request": "launch",
+            "runtimeExecutable": "electron",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },{
+            "name": "PowerShell: Windows PowerShell",
+            "type": "PowerShell",
+            "request": "launch",
+            "sessionName": "Windows PowerShell (x64)"
+        },
+        {
+            "name": "(gdb) Attach",
+            "type": "cppdbg",
+            "request": "attach",
+            "program": "enter program name, for example ${workspaceFolder}/a.out",
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Launch and Debug Standalone Blazor WebAssembly App",
+            "type": "blazorwasm",
+            "request": "launch",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": ".NET Core Launch (web)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/bin/Debug/www.World.Wide.Web://<project-name.dll>",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach"
+        },{
+            "name": "Launch Program",
+            "program": "${workspaceFolder}/<.jjs",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        {
+            "name": "Launch and Debug Hosted Blazor WebAssembly App",
+            "type": "blazorwasm",
+            "request": "launch",
+            "hosted": true,
+            "program": "${workspaceFolder}/bin/Debug/<Target-framework>Jerad/<project-name.dll>",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "C#: jerad Debug",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/<relative-path-to-project-folder>jerad.csproj"
+        },
+        
+        
+        {
+          "name": ".NET Core Launch (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/bin/Debug/<target-framework>/<project-name.dll>",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "pipeTransport": {
+                "pipeCwd": "${workspaceFolder}",
+                "pipeProgram": "enter the fully qualified path for the pipe program name, for example '/usr/bin/ssh'",
+                "pipeArgs": [],
+                "debuggerPath": "enter the path for the debugger on the target machine, for example ~/vsdbg/vsdbg"
+            }
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug",
+            "program": "${workspaceFolder}/<executable file>",
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
