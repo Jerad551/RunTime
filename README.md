@@ -1,1 +1,1 @@
-.devcontainer/devcontainer.jrad
+.devcontainer/devcontainer.json
